@@ -1,0 +1,41 @@
+# --- Python / Django ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.build/
+dist/
+.eggs/
+
+# Byte-compiled / cache
+.pytest_cache/
+.cache/
+
+# Virtual env
+venv/
+ENV/
+env/
+.venv/
+
+# Django stuff
+db.sqlite3
+media/
+staticfiles/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Migrations you want to keep — allow files but ignore pyc
+#migrations/
+
+# Node (if used later)
+node_modules/

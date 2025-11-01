@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+  <h1 class="mb-1">{{ post.title }}</h1>
+  <p class="text-muted">
+    by {{ post.author }}
+    {% if post.created_at %}
+      | Created {{ post.created_at|date:"Y-m-d H:i" }}
+    {% endif %}
+    {% if post.updated_at and post.updated_at != post.created_at %}
+      | Updated {{ post.updated_at|date:"Y-m-d H:i" }}
+    {% endif %}
+  </p>
+
+  <div class="mb-3">
+    {{ post.body|linebreaks }}
+  </div>
+
+  {% if user.is_authenticated and user == post.author or user.is_authenticated and user.is_staff %}
+    <a class="btn btn-primary me-2" href="{% url 'blog:post_update' post.pk %}">Edit</a>
+    <a class="btn btn-danger" href="{% url 'blog:post_delete' post.pk %}">Delete</a>
+  {% endif %}
+
+  <hr>
+
+  <h3>Comments</h3>
+  {% for comment in comments %}
+    <div class="border p-2 mb-2">
+      <strong>{{ comment.author }}</strong> said on {{ comment.created_at|date:"Y-m-d H:i" }}:
+      <p>{{ comment.text|linebreaks }}</p>
+    </div>
+  {% empty %}
+    <p>No comments yet.</p>
+  {% endfor %}
+
+  {% if user.is_authenticated %}
+    <h4>Add a comment</h4>
+    <form method="POST">
+      {% csrf_token %}
+      {{ comment_form.as_p }}
+      <button type="submit" class="btn btn-success">Post Comment</button>
+    </form>
+  {% else %}
+    <p><a href="{% url 'login' %}">Login</a> to post a comment.</p>
+  {% endif %}
+{% endblock %}
+
+
+
