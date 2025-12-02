@@ -1,0 +1,10 @@
+{% extends "blw/base.html" %}
+{% block title %}Add Meal{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Add Meal</h1>
+<form method="post" enctype="multipart/form-data" class="card card-body">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

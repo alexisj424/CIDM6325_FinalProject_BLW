@@ -1,0 +1,21 @@
+{% extends "blw/base.html" %}
+{% block title %}Reactions{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">Reactions</h1>
+  <a class="btn btn-primary" href="{% url 'reaction_add' %}">Add Reaction</a>
+</div>
+
+<ul class="list-group">
+  {% for r in reactions %}
+  <li class="list-group-item">
+    <strong>{{ r.baby }}</strong> — {{ r.food }} — {{ r.get_reaction_type_display }} ({{ r.severity }}/5) — {{ r.date }}
+    {% if r.notes %}
+      <div class="text-muted mt-1">{{ r.notes }}</div>
+    {% endif %}
+  </li>
+  {% empty %}
+  <li class="list-group-item">No reactions recorded.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
